@@ -1,0 +1,3 @@
+[submodule "third_party/EaselJS"]
+	path = third_party/EaselJS
+	url = https://github.com/CreateJS/EaselJS.git
