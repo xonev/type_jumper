@@ -17,3 +17,15 @@ class NT.Platform
 
   getDisplayObject: () ->
     return @tiles
+    
+  move: ( x = -1, y = 0 ) ->
+    @tiles.x += x
+    @tiles.y += y
+    
+  isVisibleInCanvas: ( @canvas ) ->
+    @tiles.x + @getWidth() >= 0 and @tiles.x <= @canvas.width
+  
+  width = null
+  getWidth: () ->
+    return width unless width == null
+    width = @tileBitmap.width * @widthByTiles

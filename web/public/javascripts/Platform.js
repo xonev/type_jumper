@@ -7,6 +7,7 @@
   window.NT = NT;
 
   NT.Platform = (function() {
+    var width;
 
     function Platform(widthByTiles, tileBitmap, x, y) {
       var clonedTile, i, _i, _ref;
@@ -29,6 +30,31 @@
 
     Platform.prototype.getDisplayObject = function() {
       return this.tiles;
+    };
+
+    Platform.prototype.move = function(x, y) {
+      if (x == null) {
+        x = -1;
+      }
+      if (y == null) {
+        y = 0;
+      }
+      this.tiles.x += x;
+      return this.tiles.y += y;
+    };
+
+    Platform.prototype.isVisibleInCanvas = function(canvas) {
+      this.canvas = canvas;
+      return this.tiles.x + this.getWidth() >= 0 && this.tiles.x <= this.canvas.width;
+    };
+
+    width = null;
+
+    Platform.prototype.getWidth = function() {
+      if (width !== null) {
+        return width;
+      }
+      return width = this.tileBitmap.width * this.widthByTiles;
     };
 
     return Platform;
