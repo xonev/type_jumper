@@ -7,8 +7,15 @@
     canvas = document.getElementById('game');
     contentLoader = new NT.ContentLoader();
     return contentLoader.startDownload(function() {
-      Ticker.setFPS(60);
-      return Ticker.addListener(new NT.Game(canvas, contentLoader));
+      var game;
+      game = new NT.Game(canvas, contentLoader);
+      return game.loadLevel([
+        {
+          word: "test"
+        }, {
+          word: "another test"
+        }
+      ]);
     });
   };
 
