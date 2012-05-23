@@ -23,35 +23,46 @@
       ninja.x = 320;
       ninja.y = 240;
       this.stage.addChild(ninja);
-      this.loadPlatforms(jsonLevel);
+      this.load(jsonLevel);
       Ticker.addListener(this);
       Ticker.setFPS(60);
     }
 
-    Level.prototype.loadPlatforms = function(jsonLevel) {
-      var lastPlatform, platformDef, platformTile, x, _i, _len, _results;
-      this.platforms = [];
+    Level.prototype.load = function(jsonLevel) {
+      var PLATFORM_GAP_SPACING, WORD_HEIGHT_DELTA, lastPlatform, platformDef, platformTile, word, x, _i, _len, _results;
       platformTile = new Bitmap(this.contentLoader.imgTile);
       platformTile.width = this.contentLoader.imgTile.width;
       platformTile.height = this.contentLoader.imgTile.height;
+      this.platforms = [];
+      this.words = [];
       x = 0;
+      PLATFORM_GAP_SPACING = 80;
+      WORD_HEIGHT_DELTA = 150;
       _results = [];
       for (_i = 0, _len = jsonLevel.length; _i < _len; _i++) {
         platformDef = jsonLevel[_i];
-        lastPlatform = new NT.Platform(5, platformTile, x, this.canvas.height - 60);
+        lastPlatform = new NT.Platform(platformDef.word.length, platformTile, x, this.canvas.height - 60);
         this.platforms.push(lastPlatform);
-        _results.push(x = lastPlatform.getWidth() + 50);
+        console.log(lastPlatform.getWidth());
+        word = new NT.Word(platformDef.word, x + lastPlatform.getWidth() + (PLATFORM_GAP_SPACING / 2), lastPlatform.tiles.y - WORD_HEIGHT_DELTA);
+        this.words.push(word);
+        _results.push(x += lastPlatform.getWidth() + PLATFORM_GAP_SPACING);
       }
       return _results;
     };
 
     Level.prototype.startLevel = function() {
-      var platform, _i, _len, _ref, _results;
+      var platform, word, _i, _j, _len, _len1, _ref, _ref1, _results;
       _ref = this.platforms;
-      _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         platform = _ref[_i];
-        _results.push(this.stage.addChild(platform.getDisplayObject()));
+        this.stage.addChild(platform.getDisplayObject());
+      }
+      _ref1 = this.words;
+      _results = [];
+      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+        word = _ref1[_j];
+        _results.push(this.stage.addChild(word.getDisplayObject()));
       }
       return _results;
     };
@@ -59,18 +70,6 @@
     moveVelocity = -1;
 
     Level.prototype.tick = function() {
-      var platform, _i, _len, _ref;
-      _ref = this.platforms;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        platform = _ref[_i];
-        if (!platform.isVisibleInCanvas(this.canvas)) {
-          moveVelocity *= -2;
-        }
-        if (Math.abs(moveVelocity) > 10) {
-          moveVelocity /= 10 | 0;
-        }
-        platform.move(moveVelocity);
-      }
       return this.stage.update();
     };
 

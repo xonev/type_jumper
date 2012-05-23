@@ -4,8 +4,11 @@ init = () ->
   contentLoader.startDownload ->    
     game = new NT.Game canvas, contentLoader
     game.loadLevel [
-      {word: "test"},
-      {word: "another test"}
+      {word: "N"},
+      {word: "I"},
+      {word: "N"},
+      {word: "J"},
+      {word: "A"},
     ]
 
 document.onreadystatechange = () ->

@@ -11,9 +11,15 @@
       game = new NT.Game(canvas, contentLoader);
       return game.loadLevel([
         {
-          word: "test"
+          word: "N"
         }, {
-          word: "another test"
+          word: "I"
+        }, {
+          word: "N"
+        }, {
+          word: "J"
+        }, {
+          word: "A"
         }
       ]);
     });

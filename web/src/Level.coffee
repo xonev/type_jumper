@@ -20,31 +20,40 @@ class NT.Level
     ninja.y = 240
     @stage.addChild ninja
     
-    @loadPlatforms jsonLevel
+    @load jsonLevel
     
     Ticker.addListener this
     # Targeting 60 FPS
     Ticker.setFPS 60
   
-  loadPlatforms: (jsonLevel) ->
-    @platforms = []
+  load: (jsonLevel) ->
     platformTile = new Bitmap @contentLoader.imgTile
     platformTile.width = @contentLoader.imgTile.width
     platformTile.height = @contentLoader.imgTile.height
+    
+    @platforms = []
+    @words = []
     x = 0
+    PLATFORM_GAP_SPACING = 80
+    WORD_HEIGHT_DELTA = 150
     for platformDef in jsonLevel
-      lastPlatform = new NT.Platform 5, platformTile, x, @canvas.height - 60
+      lastPlatform = new NT.Platform platformDef.word.length, platformTile, x, @canvas.height - 60
       @platforms.push lastPlatform
-      x = lastPlatform.getWidth() + 50
+      console.log lastPlatform.getWidth()
+      word = new NT.Word platformDef.word, x + lastPlatform.getWidth() + ( PLATFORM_GAP_SPACING / 2 ), lastPlatform.tiles.y - WORD_HEIGHT_DELTA
+      @words.push word
+      x += lastPlatform.getWidth() + PLATFORM_GAP_SPACING
       
   startLevel: () ->
     for platform in @platforms
       @stage.addChild platform.getDisplayObject()
+    for word in @words
+      @stage.addChild word.getDisplayObject()
       
   moveVelocity = -1
   tick: ->
-    for platform in @platforms
-      if not platform.isVisibleInCanvas(@canvas) then moveVelocity *= -2
-      if Math.abs(moveVelocity) > 10 then moveVelocity /= 10 | 0
-      platform.move moveVelocity
+#    for platform in @platforms
+#      if not platform.isVisibleInCanvas(@canvas) then moveVelocity *= -2
+#      if Math.abs(moveVelocity) > 10 then moveVelocity /= 10 | 0
+#      platform.move moveVelocity
     @stage.update()
