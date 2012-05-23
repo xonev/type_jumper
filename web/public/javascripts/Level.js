@@ -43,7 +43,6 @@
         platformDef = jsonLevel[_i];
         lastPlatform = new NT.Platform(platformDef.word.length, platformTile, x, this.canvas.height - 60);
         this.platforms.push(lastPlatform);
-        console.log(lastPlatform.getWidth());
         word = new NT.Word(platformDef.word, x + lastPlatform.getWidth() + (PLATFORM_GAP_SPACING / 2), lastPlatform.tiles.y - WORD_HEIGHT_DELTA);
         this.words.push(word);
         _results.push(x += lastPlatform.getWidth() + PLATFORM_GAP_SPACING);

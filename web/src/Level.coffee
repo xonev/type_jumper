@@ -39,7 +39,6 @@ class NT.Level
     for platformDef in jsonLevel
       lastPlatform = new NT.Platform platformDef.word.length, platformTile, x, @canvas.height - 60
       @platforms.push lastPlatform
-      console.log lastPlatform.getWidth()
       word = new NT.Word platformDef.word, x + lastPlatform.getWidth() + ( PLATFORM_GAP_SPACING / 2 ), lastPlatform.tiles.y - WORD_HEIGHT_DELTA
       @words.push word
       x += lastPlatform.getWidth() + PLATFORM_GAP_SPACING
