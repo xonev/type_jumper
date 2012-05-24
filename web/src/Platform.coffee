@@ -18,14 +18,20 @@ class NT.Platform
 
   getDisplayObject: () ->
     return @tiles
-    
+
+  update: (elapsedSec) ->
+    @x += @velocity.x * elapsedSec
+    @y += @velocity.y * elapsedSec
+    @tiles.x = Math.round @x
+    @tiles.y = Math.round @y
+
   move: ( x = -1, y = 0 ) ->
     @tiles.x += x
     @tiles.y += y
-    
+
   isVisibleInCanvas: ( canvas ) ->
     @tiles.x + @getWidth() >= 0 and @tiles.x <= canvas.width
-  
+
   getWidth: () ->
     return @width unless @width == null
     @width = @tileBitmap.width * @widthByTiles
