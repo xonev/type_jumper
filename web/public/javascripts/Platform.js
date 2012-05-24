@@ -17,6 +17,10 @@
       this.tiles = new Container();
       this.tiles.x = this.x;
       this.tiles.y = this.y;
+      this.velocity = {
+        x: 0,
+        y: 0
+      };
       this.tileBitmap.regX = 0;
       this.tileBitmap.regY = 0;
       for (i = 0, _ref = this.widthByTiles; 0 <= _ref ? i < _ref : i > _ref; 0 <= _ref ? i++ : i--) {

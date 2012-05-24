@@ -7,8 +7,9 @@ class NT.Platform
    @tiles = new Container()
    @tiles.x = @x
    @tiles.y = @y
-   @tileBitmap.regX = 0;
-   @tileBitmap.regY = 0;
+   @velocity = x: 0, y: 0
+   @tileBitmap.regX = 0
+   @tileBitmap.regY = 0
    for i in [0...@widthByTiles]
     clonedTile = tileBitmap.clone()
     clonedTile.x = i * tileBitmap.width

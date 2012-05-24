@@ -7,3 +7,4 @@ class NT.Game
   loadLevel: (jsonLevelDef) ->
     @level = new NT.Level @canvas, @contentLoader, jsonLevelDef
     @level.startLevel()
+

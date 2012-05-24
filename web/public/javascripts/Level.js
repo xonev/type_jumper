@@ -9,19 +9,32 @@
     var moveVelocity;
 
     function Level(canvas, contentLoader, jsonLevel) {
+<<<<<<< HEAD
       var background, g, ninja;
       this.canvas = canvas;
       this.contentLoader = contentLoader;
+=======
+      var background, g, ninjaBmp;
+      this.canvas = canvas;
+      this.contentLoader = contentLoader;
+      this.lastElapsed = 0;
+>>>>>>> Smoothed animations.
       g = new Graphics();
       g.beginLinearGradientFill(["#369", "#036"], [0, 1], 0, 0, 0, this.canvas.height).drawRect(0, 0, this.canvas.width, this.canvas.height).draw(this.canvas.getContext("2d"));
       background = new Shape(g);
       background.cache(0, 0, this.canvas.width, this.canvas.height);
       this.stage = new Stage(this.canvas);
       this.stage.addChild(background);
+<<<<<<< HEAD
       ninja = new Bitmap(this.contentLoader.imgNinja);
       ninja.x = 320;
       ninja.y = 240;
       this.stage.addChild(ninja);
+=======
+      ninjaBmp = new Bitmap(this.contentLoader.imgNinja);
+      this.ninja = new NT.Ninja(ninjaBmp, 320, 240);
+      this.stage.addChild(this.ninja.getDisplayObject());
+>>>>>>> Smoothed animations.
       this.load(jsonLevel);
       Ticker.addListener(this);
       Ticker.setFPS(60);
@@ -65,9 +78,19 @@
       return _results;
     };
 
+<<<<<<< HEAD
     moveVelocity = -1;
 
     Level.prototype.tick = function() {
+=======
+    moveVelocity = -600;
+
+    Level.prototype.tick = function() {
+      var currentElapsed, elapsedSec;
+      elapsedSec = Ticker.getTime(false);
+      currentElapsed = (elapsedSec - this.lastElapsed) / 1000;
+      this.lastElapsed = elapsedSec;
+>>>>>>> Smoothed animations.
       return this.stage.update();
     };
 
