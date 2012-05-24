@@ -3,6 +3,7 @@ window.NT = NT
 
 class NT.Platform
   constructor: (@widthByTiles, @tileBitmap, @x = 0, @y = 20) ->
+   @moveVelocity = -100
    @width = null
    @tiles = new Container()
    @tiles.x = @x

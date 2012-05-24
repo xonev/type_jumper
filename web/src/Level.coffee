@@ -51,15 +51,17 @@ class NT.Level
       @stage.addChild word.getDisplayObject()
 
   # moveVelocity is in units of pixels per second
-  moveVelocity = -600
   tick: ->
     elapsedSec = Ticker.getTime(false)
     currentElapsed = (elapsedSec - @lastElapsed) / 1000
     @lastElapsed = elapsedSec
 
-#    for platform in @platforms
-#      if not platform.isVisibleInCanvas(@canvas) then moveVelocity *= -2
-#      if Math.abs(moveVelocity) > 1000 then moveVelocity /= 10 | 0
-#      platform.velocity = x: moveVelocity, y: 0
-#      platform.update(currentElapsed)
+    moveVelocity = null
+    for platform in @platforms
+      moveVelocity = platform.moveVelocity
+      if not platform.isVisibleInCanvas(@canvas) then moveVelocity *= -2
+      if Math.abs(moveVelocity) > 400 then moveVelocity /= 10 | 0
+      platform.moveVelocity = moveVelocity
+      platform.velocity = x: moveVelocity, y: 0
+      platform.update(currentElapsed)
     @stage.update()
