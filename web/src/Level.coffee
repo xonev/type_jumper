@@ -58,10 +58,9 @@ class NT.Level
 
     moveVelocity = null
     for platform in @platforms
-      moveVelocity = platform.moveVelocity
+      moveVelocity = platform.velocity.x
       if not platform.isVisibleInCanvas(@canvas) then moveVelocity *= -2
       if Math.abs(moveVelocity) > 400 then moveVelocity /= 10 | 0
-      platform.moveVelocity = moveVelocity
       platform.velocity = x: moveVelocity, y: 0
       platform.update(currentElapsed)
     @stage.update()

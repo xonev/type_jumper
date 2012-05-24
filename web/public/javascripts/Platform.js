@@ -14,13 +14,12 @@
       this.tileBitmap = tileBitmap;
       this.x = x != null ? x : 0;
       this.y = y != null ? y : 20;
-      this.moveVelocity = -100;
       this.width = null;
       this.tiles = new Container();
       this.tiles.x = this.x;
       this.tiles.y = this.y;
       this.velocity = {
-        x: 0,
+        x: -100,
         y: 0
       };
       this.tileBitmap.regX = 0;

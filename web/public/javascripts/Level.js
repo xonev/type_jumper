@@ -74,14 +74,13 @@
       _ref = this.platforms;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         platform = _ref[_i];
-        moveVelocity = platform.moveVelocity;
+        moveVelocity = platform.velocity.x;
         if (!platform.isVisibleInCanvas(this.canvas)) {
           moveVelocity *= -2;
         }
         if (Math.abs(moveVelocity) > 400) {
           moveVelocity /= 10 | 0;
         }
-        platform.moveVelocity = moveVelocity;
         platform.velocity = {
           x: moveVelocity,
           y: 0
